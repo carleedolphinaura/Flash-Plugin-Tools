@@ -20,6 +20,14 @@ void install_64bit(GtkWidget *widget, gpointer flash) //64 -bit Installation
   system("rm libflashplayer-10.0.45.2.linux-x86_64.so.tar.gz");
   system("zenity --info --text 'Flash Plugin Installed Successfully'");
 }
+void install_beta(GtkWidget *widget, gpointer flash)
+{
+  system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc_linux_040510.tar.gz");
+  system("tar xvfz flashplayer10_1_rc_linux_*tar.gz");
+  system("gksudo 'mv libflashplayer.so /usr/lib/mozilla/plugins/libflashplayer.so'");
+  system("rm flashplayer10_1_rc_linux_*tar.gz");
+  system("zenity --info --text 'Flash Player 10.1 Installed Successfully'");
+}
 void remove_flsh(GtkWidget *widget, gpointer flash)//Flash Removal
 {
   system("gksudo 'rm /var/lib/dpkg/info/flashplugin* '");
@@ -107,6 +115,10 @@ int main(int argc, char** argv) {
 
   g_signal_connect(remove_flash, "clicked", 
       G_CALLBACK(remove_flsh), flash);
+      
+  g_signal_connect(install_flash_beta, "clicked",
+      G_CALLBACK(install_beta), flash);
+      
 system("echo 'Adobe Flash Tools For Ubuntu'");
 system("echo 'Designed By Carlee/Dolphinaura (Ubuntu Forums)'");
 system("echo 'Licenced Under GPL v3'");
