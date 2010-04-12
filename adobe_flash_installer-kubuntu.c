@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
   GtkWidget *label;
   GtkWidget *title1;
   GtkWidget *title2;
-  GtkWidget *install_flash_beta
+  GtkWidget *install_flash_beta;
   PangoFontDescription *bold = pango_font_description_from_string ( "Sans Bold 24");//Bold Font Paremeters
 
   gtk_init(&argc, &argv);
@@ -81,20 +81,24 @@ int main(int argc, char** argv) {
   frame = gtk_fixed_new();
   gtk_container_add(GTK_CONTAINER(window), frame); //Draw Window
    
-  install_x86 = gtk_button_new_with_label("Install Flash (x86)"); //32 - bit Flash Button
+    install_x86 = gtk_button_new_with_label("Install Flash (x86)"); //32 - bit Flash Button
   gtk_widget_set_size_request(install_x86, 140, 35);
   gtk_fixed_put(GTK_FIXED(frame), install_x86, 77, 90);
 
   install_x64 = gtk_button_new_with_label("Install Flash (x64)");//64 - bit Flash Button
   gtk_widget_set_size_request(install_x64, 140, 35);
   gtk_fixed_put(GTK_FIXED(frame), install_x64, 77, 135);
+  
+  install_flash_beta = gtk_button_new_with_label("Install Flash Beta");//Beta Flash Button
+  gtk_widget_set_size_request(install_flash_beta, 140, 35);
+  gtk_fixed_put(GTK_FIXED(frame), install_flash_beta, 77, 180);
 
   remove_flash = gtk_button_new_with_label("Remove Flash");//Remove Flash
   gtk_widget_set_size_request(remove_flash, 120, 35);
-  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 180);
+  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 225);
 
   label = gtk_label_new("Designed By Gary/Dolphinaura");
-  gtk_fixed_put(GTK_FIXED(frame), label, 45, 230); 
+  gtk_fixed_put(GTK_FIXED(frame), label, 45, 280); 
   title1 = gtk_label_new("Adobe Flash");//Title (Row 1)
   gtk_fixed_put(GTK_FIXED(frame), title1, 45, 10); 
   gtk_widget_show_all(window);
@@ -103,6 +107,7 @@ int main(int argc, char** argv) {
   gtk_widget_show_all(window);
   gtk_widget_modify_font(GTK_WIDGET(title1),bold);//Make Title (Row 1) Bold
   gtk_widget_modify_font(GTK_WIDGET(title2),bold);//Make TItle (Row 2) Bold
+
 
 
   g_signal_connect(window, "destroy",
@@ -115,7 +120,7 @@ int main(int argc, char** argv) {
       G_CALLBACK(install_64bit), flash);
 
   g_signal_connect(remove_flash, "clicked", 
-      G_CALLBACK(remove_flsh), flash
+      G_CALLBACK(remove_flsh), flash);
       
   g_signal_connect(install_flash_beta, "clicked",
       G_CALLBACK(install_beta), flash);

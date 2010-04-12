@@ -23,7 +23,7 @@ void install_64bit(GtkWidget *widget, gpointer flash) //64 -bit Installation
 void install_beta(GtkWidget *widget, gpointer flash)
 {
   system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc_linux_040510.tar.gz");
-  system("tar xvfz flashplayer10_1_rc_linux_*tar.gz");
+  system("tar xvfz flashplayer10_1_rc_linux_*");
   system("gksudo 'mv libflashplayer.so /usr/lib/mozilla/plugins/libflashplayer.so'");
   system("rm flashplayer10_1_rc_linux_*tar.gz");
   system("zenity --info --text 'Flash Player 10.1 Installed Successfully'");
@@ -68,6 +68,8 @@ int main(int argc, char** argv) {
   GtkWidget *label;
   GtkWidget *title1;
   GtkWidget *title2;
+  GtkWidget *install_flash_beta;
+  
   PangoFontDescription *bold = pango_font_description_from_string ( "Sans Bold 24");//Bold Font Paremeters
 
   gtk_init(&argc, &argv);
@@ -87,13 +89,17 @@ int main(int argc, char** argv) {
   install_x64 = gtk_button_new_with_label("Install Flash (x64)");//64 - bit Flash Button
   gtk_widget_set_size_request(install_x64, 140, 35);
   gtk_fixed_put(GTK_FIXED(frame), install_x64, 77, 135);
+  
+  install_flash_beta = gtk_button_new_with_label("Install Flash Beta");//Beta Flash Button
+  gtk_widget_set_size_request(install_flash_beta, 140, 35);
+  gtk_fixed_put(GTK_FIXED(frame), install_flash_beta, 77, 180);
 
   remove_flash = gtk_button_new_with_label("Remove Flash");//Remove Flash
   gtk_widget_set_size_request(remove_flash, 120, 35);
-  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 180);
+  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 225);
 
   label = gtk_label_new("Designed By Gary/Dolphinaura");
-  gtk_fixed_put(GTK_FIXED(frame), label, 45, 230); 
+  gtk_fixed_put(GTK_FIXED(frame), label, 45, 280); 
   title1 = gtk_label_new("Adobe Flash");//Title (Row 1)
   gtk_fixed_put(GTK_FIXED(frame), title1, 45, 10); 
   gtk_widget_show_all(window);
