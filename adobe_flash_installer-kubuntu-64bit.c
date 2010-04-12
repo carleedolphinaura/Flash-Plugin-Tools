@@ -9,11 +9,12 @@
 
 void install_32bit(GtkWidget *widget, gpointer flash) //32 - bit Installation
 {
-  system("gksudo 'apt-get install flashplugin-installer'"); 
+  system("gksudo 'apt-get -y install flashplugin-installer'"); 
   system("zenity --info --text 'Flash Plugin Installed Successfully'");
 }
 void install_64bit(GtkWidget *widget, gpointer flash) //64 -bit Installation
 {
+  system("gksudo 'dpkg --purge --force all nspluginwrapper'");
   system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.45.2.linux-x86_64.so.tar.gz"); 
   system("tar xvfz libflash*"); 
   system("gksudo 'mv libflashplayer.so /usr/lib/mozilla/plugins/libflashplayer.so'");
@@ -22,6 +23,7 @@ void install_64bit(GtkWidget *widget, gpointer flash) //64 -bit Installation
 }
 void install_beta(GtkWidget *widget, gpointer flash)
 {
+  system("gksudo 'apt-get -y install nspluginwrapper'");
   system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc_linux_040510.tar.gz");
   system("tar xvfz flashplayer10_1_rc_linux_*");
   system("gksudo 'mv libflashplayer.so /usr/lib/mozilla/plugins/libflashplayer.so'");
