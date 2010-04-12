@@ -12,6 +12,14 @@ void install_32bit(GtkWidget *widget, gpointer flash) //32 - bit Installation
   system("gksudo 'apt-get install flashplugin-installer'"); 
   system("zenity --info --text 'Flash Plugin Installed Successfully'");
 }
+void install_64bit(GtkWidget *widget, gpointer flash) //64 -bit Installation
+{
+  system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/libflashplayer-10.0.45.2.linux-x86_64.so.tar.gz"); 
+  system("tar xvfz libflash*"); 
+  system("gksudo 'mv libflashplayer.so /usr/lib/mozilla/plugins/libflashplayer.so'");
+  system("rm libflashplayer-10.0.45.2.linux-x86_64.so.tar.gz");
+  system("zenity --info --text 'Flash Plugin Installed Successfully'");
+}
 void install_beta(GtkWidget *widget, gpointer flash)
 {
   system("wget -c http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_1_rc_linux_040510.tar.gz");
@@ -54,6 +62,7 @@ int main(int argc, char** argv) {
   GtkWidget *flash;
   GtkWidget *window;
   GtkWidget *frame;
+  GtkWidget *install_x64;
   GtkWidget *install_x86;
   GtkWidget *remove_flash;
   GtkWidget *label;
@@ -77,14 +86,17 @@ int main(int argc, char** argv) {
   gtk_widget_set_size_request(install_x86, 140, 35);
   gtk_fixed_put(GTK_FIXED(frame), install_x86, 77, 90);
 
+  install_x64 = gtk_button_new_with_label("Install Flash (x64)");//64 - bit Flash Button
+  gtk_widget_set_size_request(install_x64, 140, 35);
+  gtk_fixed_put(GTK_FIXED(frame), install_x64, 77, 135);
   
   install_flash_beta = gtk_button_new_with_label("Install Flash Beta");//Beta Flash Button
   gtk_widget_set_size_request(install_flash_beta, 140, 35);
-  gtk_fixed_put(GTK_FIXED(frame), install_flash_beta, 77, 135);
+  gtk_fixed_put(GTK_FIXED(frame), install_flash_beta, 77, 180);
 
   remove_flash = gtk_button_new_with_label("Remove Flash");//Remove Flash
   gtk_widget_set_size_request(remove_flash, 120, 35);
-  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 180);
+  gtk_fixed_put(GTK_FIXED(frame), remove_flash, 87, 225);
 
   label = gtk_label_new("Designed By Gary/Dolphinaura");
   gtk_fixed_put(GTK_FIXED(frame), label, 45, 280); 
@@ -103,6 +115,9 @@ int main(int argc, char** argv) {
   
   g_signal_connect(install_x86, "clicked", 
       G_CALLBACK(install_32bit), flash);
+      
+  g_signal_connect(install_x64, "clicked", 
+      G_CALLBACK(install_64bit), flash);
 
   g_signal_connect(remove_flash, "clicked", 
       G_CALLBACK(remove_flsh), flash);
