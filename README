@@ -1,10 +1,14 @@
 This is the Adobe Flash Plugin Tools Git Repository
 
+**NOTE FLASH 10.1 HAS NOT BEEN FULLY TESTED YET**
 Changelog
 ---------
+April 12, 2010
+*Program should run on Lucid now
+*Flash 10.1 beta included
 April 10, 2010
 * First Commit
 
 ToDo
-*Add Flash 10.1 Beta Support - Done , just need to add the button
 *Add Autoupdate
+*Consider arch detection
